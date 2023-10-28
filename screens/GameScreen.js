@@ -5,9 +5,9 @@ import { useEffect, useState } from "react";
 import PrimaryButton from "../components/ui/PrimaryButton";
 import Card from "../components/ui/Card";
 import InstructionText from "../components/ui/InstructionText";
+import { Ionicons } from "@expo/vector-icons";
 
 function generateRandomBetween(min, max, exclude) {
-  console.log("ye generator chala");
   const rndNum = Math.floor(Math.random() * (max - min)) + min;
 
   if (rndNum === exclude) {
@@ -26,7 +26,6 @@ function GameScreen({ userNumber, onGameOver }) {
   const [currentGuess, setCurrentGuess] = useState(initialGuess);
 
   const setterChala = (newRandomNumber) => {
-    console.log("setter chala");
     setCurrentGuess(newRandomNumber);
   };
 
@@ -46,7 +45,6 @@ function GameScreen({ userNumber, onGameOver }) {
     } else {
       minBoundary = currentGuess + 1;
     }
-    console.log(minBoundary, maxBoundary);
     const newRandomNumber = generateRandomBetween(
       minBoundary,
       maxBoundary,
@@ -56,7 +54,6 @@ function GameScreen({ userNumber, onGameOver }) {
   };
 
   useEffect(() => {
-    console.log("currentguess: ", currentGuess);
     if (userNumber === currentGuess) {
       onGameOver();
     }
@@ -73,12 +70,12 @@ function GameScreen({ userNumber, onGameOver }) {
         <View style={styles.buttonsContainer}>
           <View style={styles.buttonContainer}>
             <PrimaryButton onPress={() => nextGuessHandler("lower")}>
-              -
+              <Ionicons name="md-remove" size={18} color={"#fff"} />
             </PrimaryButton>
           </View>
           <View style={styles.buttonContainer}>
             <PrimaryButton onPress={() => nextGuessHandler("greater")}>
-              +
+              <Ionicons name="md-add" size={18} color={"#fff"} />
             </PrimaryButton>
           </View>
         </View>
